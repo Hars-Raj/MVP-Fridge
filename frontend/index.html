@@ -1,14 +1,9 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello World</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main>
-      <h1>Hello world</h1>
-    </main>
-  </body>
-</html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pindrop</title><link rel="stylesheet" href="styles.css"><link href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" rel="stylesheet"></head>
+<body><div class="app"><header><a class="brand" href="#home"><b>●</b> pindrop</a><div>♡　<span class="avatar">JR</span></div></header><main>
+<section class="hero" id="home"><div><small>DISCOVER YOUR NEXT BITE</small><h1>Good food is<br><i>closer than you think.</i></h1><p>Find places worth going to, recommended by people with good taste.</p></div><div class="orbit">🍜　☕<br><br>🍛　🥐</div></section>
+<section class="search" id="search"><input id="query" placeholder="⌕  Search places, cuisine or tags"><select id="sort"><option value="rating">Highest rated</option><option value="distance">Nearest first</option><option value="price">Most affordable</option><option value="trend">Trending</option></select></section>
+<nav class="chips"><button class="active" data-filter="all">All places</button><button data-filter="nearby">Near me</button><button data-filter="cheap">Affordable</button><button data-filter="trending">Trending</button><button data-filter="new">New spots</button></nav>
+<div class="grid"><section><div class="heading"><div><small>LIVE DISCOVERY</small><h2>Explore nearby</h2></div><button id="locate">◎ Use my location</button></div><div class="map" id="map"></div><div class="heading lower"><div><small>CURATED FOR YOU</small><h2>Places worth the walk</h2></div><span id="count"></span></div><div id="places"></div></section>
+<aside><section class="panel selected-panel" id="selectedPlace"><div class="selected-empty"><small>SELECT A PIN OR PLACE</small><h2>Explore the map</h2><p>Choose a place to see its rating, photos, and reviews here.</p></div></section><section class="panel news-panel"><div class="heading"><div><small>WHAT'S NEW</small><h2>News around you</h2></div>•••</div><article>✦ <b>New: Soba House</b><p>Handmade noodles just opened on Killiney Road.</p><small>2 hours ago</small></article><article>％ <b>Lunch deal at The Daily Bowl</b><p>Save 20% on weekday bowls before 2pm.</p><small>Yesterday</small></article><article>♥ <b>Your circle is eating out</b><p>Alex and 4 others saved places near you.</p><small>Yesterday</small></article></section><section class="panel" id="profile"><div class="heading"><div><small>YOUR COLLECTION</small><h2>Saved places</h2></div><span id="savedCount">0</span></div><div id="saved"><p>Save a place to see it here.</p></div></section></aside></div></main>
+<nav class="bottom"><a href="#home">⌂<small>Home</small></a><a href="#map">⌖<small>Map</small></a><a href="#search">⌕<small>Search</small></a><a href="#profile">♙<small>Profile</small></a></nav></div><div id="toast"></div><script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script><script src="/mapbox-config.js"></script><script src="app.js"></script></body></html>

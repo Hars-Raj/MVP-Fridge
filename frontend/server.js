@@ -2,9 +2,22 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+  for (const line of fs.readFileSync(envPath, 'utf8').split(/\r?\n/)) {
+    const match = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+    if (match && !process.env[match[1]]) process.env[match[1]] = match[2].replace(/^['"]|['"]$/g, '');
+  }
+}
+
 const port = Number(process.env.PORT) || 3000;
 
 http.createServer((request, response) => {
+  if (request.url === '/mapbox-config.js') {
+    response.writeHead(200, { 'Content-Type': 'application/javascript; charset=utf-8', 'Cache-Control': 'no-store' });
+    response.end(`window.MAPBOX_ACCESS_TOKEN = ${JSON.stringify(process.env.MAPBOX_ACCESS_TOKEN || '')};`);
+    return;
+  }
   const filePath = request.url === '/' ? 'index.html' : request.url.slice(1);
   const safePath = path.join(__dirname, filePath);
 
