@@ -107,7 +107,7 @@
     const p = state.profile;
     document.documentElement.style.setProperty(
       '--orange',
-      p.theme === 'terracotta' ? '#c2410c' : p.theme === 'citrus' ? '#f48c06' : '#e85d04',
+      p.theme === 'terracotta' ? '#f05b6b' : p.theme === 'citrus' ? '#ff7b78' : '#ff626b',
     );
     document.body.style.setProperty('--drawer-h', p.density === 'compact' ? '180px' : '240px');
   }
@@ -330,121 +330,114 @@
     if (state.selectedId === id) openCard(id);
   }
 
+  let discoveryMode = "recommended";
+
   function cardHtml(e, compact) {
     const km = haversine(state.userHere, [e.lat, e.lng]).toFixed(1);
     return `
       <button type="button" class="food-card" data-open="${e.id}">
         <img src="${e.photo}" alt="${e.name}" />
         <div class="body">
-          <div class="row">
-            ${starsHtml(e.worthGoing, true)}
-            ${e.tiktokLed ? '<span class="badge tt">TikTok</span>' : ''}
-            ${e.viral ? '<span class="badge warn">Viral</span>' : ''}
-            ${e.venueType === 'hawker' ? '<span class="badge teal">Hawker</span>' : ''}
-          </div>
           <h3>${e.name}</h3>
           <p class="muted">${e.signatureDish} · ${e.neighbourhood} · ${km} km</p>
-          ${compact ? '' : `<p class="muted">${e.whyWorthGoing}</p>`}
-          <div class="heat ${e.tiktokRecency === 'classic' ? 'classic' : ''}" title="TikTok Heat (demo)"><span style="width:${e.tiktokHeat}%"></span></div>
-          <p class="muted">${recencyLabel(e)} · Heat ${e.tiktokHeat}/100 · demo</p>
+          <p class="muted">${e.priceLabel} / person</p>
+          <p class="recommendation-reason">${discoveryMode === 'trending' ? e.whyTrending : e.whyWorthGoing}</p>
         </div>
       </button>`;
   }
 
+  let cuisinesExpanded = false;
   function renderChips() {
-    $('chips').innerHTML = DATA.chips
+    const favourites = ['Chinese', 'Malay', 'Indian', 'Japanese'];
+    const options = [...favourites.filter(c => DATA.chips.includes(c)), ...DATA.chips.filter(c => !favourites.includes(c))];
+    $('chips').innerHTML = options
+      .filter((c, index) => cuisinesExpanded || index < 4 || state.chips.includes(c))
       .map(
         (c) =>
-          `<button type="button" class="chip ${state.chips.includes(c) ? 'is-on' : ''}" data-chip="${c}">${c}</button>`,
+          `<button type="button" class="chip ${state.chips.includes(c) ? 'is-on' : ''}" aria-pressed="${state.chips.includes(c)}" data-chip="${c}">${c}</button>`,
       )
       .join('');
+    $('cuisine-toggle').textContent = cuisinesExpanded ? 'See less −' : 'See more +';
+    $('cuisine-toggle').setAttribute('aria-expanded', String(cuisinesExpanded));
+  }
+
+  function discoveryScore(e) {
+    const dist = haversine(state.userHere, [e.lat,e.lng]);
+    if(discoveryMode === 'trending') {
+      return e.tiktokHeat * .6 + e.instagramPopularity * .2 +
+        (['this-week','newly-viral'].includes(e.tiktokRecency) ? 20 : 0);
+    }
+    return e.worthGoing*20 + matchScore(e) + e.communityScore*3 - dist*2 - (e.overhyped?12:0);
   }
 
   function renderTrending() {
-    const list = visibleEateries().slice(0, 8);
-    state.ranked = list;
-    $('trending-carousel').innerHTML = list.map((e) => cardHtml(e, true)).join('') || '<p class="muted">No matches. Clear filters.</p>';
-    $('drawer-title').textContent = state.query || state.chips.length ? 'Personalised for you' : 'Trending near you';
-    if (window.matchMedia('(min-width: 960px)').matches && state.tab === 'map') {
-      document.body.classList.add('split');
-      listPane.hidden = false;
-      listPane.innerHTML = `
-        <p class="kicker">Map / list · TikTok-first ranking</p>
-        <h2>Worth going nearby</h2>
-        <p class="muted">Google Reviews are not the primary signal. Social figures are demo data.</p>
-        <label class="field">Prioritise
-          <select id="sort-desk">
-            <option value="tiktok">TikTok Heat</option>
-            <option value="rating">Worth Going rating</option>
-            <option value="location">Distance</option>
-            <option value="affordability">Affordability</option>
-            <option value="instagram">Instagram popularity</option>
-            <option value="community">Fellow foodies</option>
-          </select>
-        </label>
-        <div class="grid">${visibleEateries().map((e) => cardHtml(e, true)).join('')}</div>`;
-      const sel = $('sort-desk');
-      if (sel) {
-        sel.value = state.sort;
-        sel.onchange = () => {
-          state.sort = sel.value;
-          persist();
-          refresh();
-        };
-      }
-    } else if (state.tab !== 'map') {
-      document.body.classList.remove('split');
-      listPane.hidden = true;
-    }
+    const list = visibleEateries().sort((a,b)=>discoveryScore(b)-discoveryScore(a));
+    state.ranked = list.slice(0,8);
+    const title = discoveryMode==='trending' ? 'Trending around you' : 'Recommended for you';
+    const explanation = discoveryMode==='trending' ? 'Places getting attention lately.' : 'Good food picks for your taste and area.';
+    const switches='<div class="discovery-modes" role="group" aria-label="Discovery mode"><button data-discovery="recommended" aria-pressed="'+(discoveryMode==='recommended')+'">For you</button><button data-discovery="trending" aria-pressed="'+(discoveryMode==='trending')+'">Trending</button></div>';
+    const cards=list.map(e=>cardHtml(e,true)).join('') || '<p class="muted">No matches. Try changing your search or filters.</p>';
+    $('drawer-title').textContent=title;
+    $('trending-carousel').innerHTML=switches+'<p class="muted">'+explanation+' Demo suggestions.</p>'+cards;
+    const desktop=window.matchMedia('(min-width: 960px)').matches;
+    document.body.classList.toggle('split',desktop && state.tab==='map');
+    listPane.hidden=!desktop || state.tab!=='map';
+    drawer.style.display=desktop || state.tab!=='map' ? 'none' : '';
+    if(desktop && state.tab==='map') listPane.innerHTML='<p class="kicker">LET’S MAKAN</p><h2>Where should we eat?</h2>'+switches+'<h3>'+title+'</h3><p class="muted">'+explanation+' Demo suggestions.</p><div class="grid">'+cards+'</div>';
   }
 
   function renderPins() {
-    pinLayer.clearLayers();
-    visibleEateries().forEach((e) => {
-      const icon = L.divIcon({
-        className: '',
-        html: `<div class="${pinClass(e)}" aria-hidden="true"><span class="food-icon">${pinFoodIcon(e)}</span>${e.tiktokLed ? '<span class="tt-dot">T</span>' : ''}</div>`,
-        iconSize: [28, 28],
-        iconAnchor: [14, 28],
-      });
-      const m = L.marker([e.lat, e.lng], { icon, title: `${e.name} · ${pinFoodIcon(e)}` });
-      m.on('click', () => openCard(e.id));
-      m.addTo(pinLayer);
-      markers[e.id] = m;
+    if (!map) return;
+    Object.values(markers).forEach(m => m.remove());
+    Object.keys(markers).forEach(k => delete markers[k]);
+    visibleEateries().forEach(e => {
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'mapbox-food-marker';
+      el.setAttribute('aria-label', e.name);
+      el.innerHTML = '<div class="' + pinClass(e) + '"><span class="food-icon">' + pinFoodIcon(e) + '</span>' + (e.tiktokLed ? '<span class="tt-dot">T</span>' : '') + '</div>';
+      el.addEventListener('click', () => openCard(e.id));
+      markers[e.id] = new mapboxgl.Marker({element:el,anchor:'bottom'}).setLngLat([e.lng,e.lat]).addTo(map);
     });
     renderRoute();
   }
 
   function renderHotzones() {
-    hotLayer.clearLayers();
-    if (!state.hotzonesOn) return;
-    DATA.hotzones.forEach((z) => {
-      const color = z.label === 'Newly viral' ? '#d00000' : z.label === 'Trending this week' ? '#e85d04' : '#0f6e6b';
-      L.circle([z.lat, z.lng], {
-        radius: z.radius,
-        color,
-        fillColor: color,
-        fillOpacity: 0.18,
-        weight: 2,
-      })
-        .on('click', () => openHotzone(z))
-        .addTo(hotLayer);
-      L.marker([z.lat, z.lng], {
-        icon: L.divIcon({ className: 'hotzone-label', html: `${z.name} · ${z.label}` }),
-      })
-        .on('click', () => openHotzone(z))
-        .addTo(hotLayer);
-    });
+    if (!map || !map.isStyleLoaded()) return;
+    (hotLayer || []).forEach(m => m.remove());
+    hotLayer = [];
+    const features = state.hotzonesOn ? DATA.hotzones.map((z, index) => {
+      const ring = [];
+      for (let i=0; i<=64; i++) {
+        const angle=i*Math.PI/32;
+        ring.push([z.lng + Math.cos(angle)*z.radius/(111320*Math.cos(z.lat*Math.PI/180)), z.lat + Math.sin(angle)*z.radius/111320]);
+      }
+      const el=document.createElement('button');
+      el.className='hotzone-label';
+      el.textContent=z.name+' · '+z.label;
+      el.onclick=()=>openHotzone(z);
+      hotLayer.push(new mapboxgl.Marker({element:el}).setLngLat([z.lng,z.lat]).addTo(map));
+      return {type:'Feature',properties:{index,color:z.label==='Newly viral'?'#ff626b':z.label==='Trending this week'?'#ff626b':'#2bc779'},geometry:{type:'Polygon',coordinates:[ring]}};
+    }) : [];
+    const data={type:'FeatureCollection',features};
+    if(map.getSource('hotzones')) map.getSource('hotzones').setData(data);
+    else {
+      map.addSource('hotzones',{type:'geojson',data});
+      map.addLayer({id:'hotzones',type:'fill',source:'hotzones',paint:{'fill-color':['get','color'],'fill-opacity':0.18}});
+      map.addLayer({id:'hotzone-borders',type:'line',source:'hotzones',paint:{'line-color':['get','color'],'line-width':2}});
+      map.on('click','hotzones',e=>openHotzone(DATA.hotzones[Number(e.features[0].properties.index)]));
+    }
   }
 
   function renderRoute() {
-    if (routeLayer) map.removeLayer(routeLayer);
-    const stops = state.crawl.stops.map(byId).filter(Boolean);
-    if (stops.length < 2 || state.tab !== 'map') return;
-    routeLayer = L.polyline(
-      stops.map((s) => [s.lat, s.lng]),
-      { color: '#e85d04', weight: 4, dashArray: '8 8' },
-    ).addTo(map);
+    if (!map || !map.isStyleLoaded()) return;
+    const stops=state.crawl.stops.map(byId).filter(Boolean);
+    const data={type:'FeatureCollection',features:stops.length>=2 && state.tab==='map' ? [{type:'Feature',properties:{},geometry:{type:'LineString',coordinates:stops.map(s=>[s.lng,s.lat])}}] : []};
+    if(map.getSource('crawl-route')) map.getSource('crawl-route').setData(data);
+    else {
+      map.addSource('crawl-route',{type:'geojson',data});
+      map.addLayer({id:'crawl-route',type:'line',source:'crawl-route',paint:{'line-color':'#ff626b','line-width':4,'line-dasharray':[2,2]}});
+    }
   }
 
   function openHotzone(z) {
@@ -467,7 +460,7 @@
     if (!e) return;
     state.selectedId = id;
     rememberSeen(id);
-    map.panTo([e.lat, e.lng]);
+    if (map) map.panTo([e.lng, e.lat]);
     sheet.hidden = false;
     const bm = isBookmarked(id);
     sheet.innerHTML = `
@@ -475,8 +468,8 @@
       <div class="content">
         <div class="row">
           ${starsHtml(e.worthGoing, true)}
-          ${e.tiktokLed ? '<span class="badge tt">TikTok-led</span>' : ''}
-          ${e.viral ? '<span class="badge warn">Viral ≠ automatically worth it</span>' : ''}
+
+
           <span class="badge demo">Demo social data</span>
         </div>
         <h1>${e.name}</h1>
@@ -486,20 +479,20 @@
         <div class="badge-row">
           ${(e.dietary || []).map((d) => `<span class="badge teal">${d}</span>`).join('')}
           <span class="badge">${e.venueType}</span>
-          <span class="badge ig">Instagram</span>
+
         </div>
-        <p class="kicker" style="margin-top:12px">TikTok Heat · ${recencyLabel(e)}</p>
+        <details class="social-context"><summary>Why people are talking about it</summary><p class="kicker" style="margin-top:12px">TikTok Heat · ${recencyLabel(e)}</p>
         <div class="heat ${e.tiktokRecency === 'classic' ? 'classic' : ''}"><span style="width:${e.tiktokHeat}%"></span></div>
         <p class="muted">${e.tiktokActivity}<br>${e.instagramActivity}<br>Creators: ${e.creators.join(', ')}</p>
         <p><strong>Why people are going:</strong> ${e.whyTrending}</p>
-        <p><strong>Why it’s worth going:</strong> ${e.whyWorthGoing}</p>
+        </details><p><strong>Why consider it:</strong> ${e.whyWorthGoing}</p>
         <p class="muted">${e.sentiment}</p>
         <div class="row" style="margin-top:12px">
           <button type="button" class="primary" data-details="${e.id}">Full details</button>
           <button type="button" class="secondary" data-bookmark="${e.id}">${bm ? 'Bookmarked' : 'Bookmark'}</button>
-          <button type="button" class="secondary" data-add-crawl="${e.id}">Add to crawl</button>
+          <details class="plan-options"><summary>Plan a visit</summary><button type="button" class="secondary" data-add-crawl="${e.id}">Add to crawl</button>
           <button type="button" class="secondary" data-share="${e.id}">Share place</button>
-          <button type="button" class="secondary" data-book="${e.id}">Reserve</button>
+          <button type="button" class="secondary" data-book="${e.id}">Reserve</button></details>
           <a class="secondary" style="text-decoration:none" href="https://www.google.com/maps/dir/?api=1&destination=${e.lat},${e.lng}" target="_blank" rel="noreferrer">Directions</a>
         </div>
         <button type="button" class="text-btn" data-close-sheet>Close</button>
@@ -936,7 +929,7 @@
 
     panel.innerHTML = `
       <div class="community-intro">
-        <p class="kicker">Outspoke community · demo visits</p>
+        <p class="kicker">MakanMates community · demo visits</p>
         <h2>Fellow foodies</h2>
         <p class="muted">Recent meals, neighbourhood favourites, and honest notes from local food explorers.</p>
       </div>
@@ -1117,6 +1110,7 @@
       <div class="grid" id="group-list"></div>
       <h3>Your demo bookings</h3>
       <div class="grid">${state.bookings.map((b) => `<article class="news-card"><strong>${byId(b.eateryId)?.name}</strong><p class="muted">${b.date} ${b.time} · ${b.pax} pax</p></article>`).join('') || '<p class="muted">No bookings yet.</p>'}</div>`;
+    panel.querySelector('[data-tab="map"]').onclick = () => showTab('map');
     const list = $('group-list');
     const draw = () => {
       list.innerHTML = state.groups
@@ -1240,7 +1234,7 @@
         <select id="pr-theme">
           <option value="orange">Orange</option>
           <option value="terracotta">Terracotta</option>
-          <option value="citrus">Citrus</option>
+          <option value="citrus">Soft coral</option>
         </select>
       </label>
       <label class="field">Density
@@ -1330,10 +1324,12 @@
     refresh();
     showTab('map');
     const top = visibleEateries()[0];
-    if (top) map.flyTo([top.lat, top.lng], 14);
+    if (top) map?.flyTo({center:[top.lng, top.lat],zoom:14});
   }
 
   function showTab(tab) {
+    document.querySelectorAll('.navigation-more[open]').forEach(d=>d.open=false);
+    document.body.dataset.page=tab;
     state.tab = tab;
     document.querySelectorAll('[data-tab]').forEach((b) => b.classList.toggle('is-active', b.dataset.tab === tab));
     const mapUi = tab === 'map';
@@ -1360,22 +1356,33 @@
   }
 
   function initMap() {
-    map = L.map('map', { zoomControl: false }).setView(SG_CENTER, 12);
-    L.control.zoom({ position: 'bottomright' }).addTo(map);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap &copy; CARTO',
-      subdomains: 'abcd',
-      maxZoom: 19,
-    }).addTo(map);
-    pinLayer = L.layerGroup().addTo(map);
-    hotLayer = L.layerGroup().addTo(map);
-    map.setMaxBounds([
-      [1.15, 103.6],
-      [1.48, 104.1],
-    ]);
+    if (!window.mapboxgl || !window.MAPBOX_ACCESS_TOKEN) {
+      $('map').innerHTML='<p class="map-error">Map unavailable. Check the Mapbox configuration and reload.</p>';
+      return;
+    }
+    try {
+      map = new mapboxgl.Map({
+        container:'map',accessToken:window.MAPBOX_ACCESS_TOKEN,
+        style:'mapbox://styles/mapbox/streets-v12',
+        center:[SG_CENTER[1],SG_CENTER[0]],zoom:12,
+        maxBounds:[[103.6,1.15],[104.1,1.48]]
+      });
+      map.addControl(new mapboxgl.NavigationControl(),'bottom-right');
+      map.on('load',()=>{ renderPins(); renderHotzones(); });
+      let reported=false;
+      map.on('error',()=>{if(!reported){toast('Map could not load. Check the connection and Mapbox token restrictions.');reported=true;}});
+      new ResizeObserver(()=>map.resize()).observe($('map'));
+    } catch {
+      map=null;
+      $('map').innerHTML='<p class="map-error">Map could not start. Try a browser with WebGL enabled.</p>';
+    }
   }
 
   function bindUi() {
+    $('cuisine-toggle').onclick = () => {
+      cuisinesExpanded = !cuisinesExpanded;
+      renderChips();
+    };
     document.querySelectorAll('[data-tab]').forEach((b) => {
       b.addEventListener('click', () => showTab(b.dataset.tab));
     });
@@ -1392,12 +1399,14 @@
       refresh();
     });
     $('btn-hotzones').onclick = () => {
+      document.querySelector('.navigation-more').open = false;
+      if (state.tab !== 'map') showTab('map');
       state.hotzonesOn = !state.hotzonesOn;
       $('btn-hotzones').classList.toggle('is-on', state.hotzonesOn);
       renderHotzones();
-      if (state.hotzonesOn) map.flyTo(SG_CENTER, 12);
+      if (state.hotzonesOn) map?.flyTo({center:[SG_CENTER[1], SG_CENTER[0]],zoom:12});
     };
-    $('btn-crawl').onclick = openCrawl;
+    $('btn-crawl').onclick = () => { document.querySelector('.navigation-more').open = false; openCrawl(); };
     $('btn-filters').onclick = openFilters;
     $('btn-collapse-drawer').onclick = () => drawer.classList.toggle('is-collapsed');
     let startY = 0;
@@ -1436,6 +1445,11 @@
     );
   }
 
+  document.addEventListener('click', event => {
+    const mode=event.target.closest('[data-discovery]');
+    if(mode){discoveryMode=mode.dataset.discovery;renderTrending();}
+  });
+  window.matchMedia('(min-width: 960px)').addEventListener('change',()=>{renderTrending();if(map)map.resize();});
   initMap();
   bindUi();
   refresh();

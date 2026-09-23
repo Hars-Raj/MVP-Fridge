@@ -3,19 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Outspoke — Discover food across Singapore</title>
+    <title>MakanMates — Discover food across Singapore</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-      crossorigin=""
-    />
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -24,22 +19,19 @@
       <aside id="list-pane" class="list-pane" hidden></aside>
 
       <header class="topbar">
-        <button class="brand" id="btn-home" type="button" aria-label="Outspoke home">
+        <button class="brand" id="btn-home" type="button" aria-label="MakanMates home">
           <img class="brand-logo" src="assets/outspoke-logo.svg" alt="Outspoke — Discover easily" />
         </button>
-        <nav class="desk-nav" aria-label="Main">
-          <button type="button" data-tab="map" class="is-active">Map</button>
-          <button type="button" data-tab="news">Promotions</button>
-          <button type="button" data-tab="foodies">Foodies</button>
-          <button type="button" data-tab="search">Search</button>
-          <button type="button" data-tab="chat">Chat</button>
-          <button type="button" data-tab="profile">Profile</button>
-        </nav>
-        <div class="top-actions">
-          <button type="button" class="ghost" id="btn-hotzones">Hotzones</button>
-          <button type="button" class="ghost" id="btn-crawl">Plan my food crawl</button>
-          <button type="button" class="icon-btn" id="btn-filters">Filters</button>
-        </div>
+        <nav class="desk-nav" aria-label="Main"><button type="button" data-tab="map" class="is-active">Discover</button>
+          <button type="button" data-tab="foodies">Community</button>
+          <button type="button" data-tab="profile">Saved &amp; me</button></nav>
+        <details class="navigation-more"><summary>More · plans &amp; deals</summary><div class="more-menu">
+          <button type="button" data-tab="news">Deals, new spots &amp; friends</button>
+          <button type="button" data-tab="search">Search &amp; history</button>
+          <button type="button" data-tab="chat">Groups &amp; plans</button>
+          <button type="button" id="btn-crawl">Plan a food crawl</button>
+          <button type="button" id="btn-hotzones">Show hotzones</button>
+        </div></details>
       </header>
 
       <div class="float-search" id="map-search-wrap">
@@ -48,23 +40,17 @@
           <input id="crave-input" name="q" placeholder="What are you craving?" enterkeyhint="search" />
           <button type="submit" class="go">Go</button>
         </form>
-        <div class="chips" id="chips"></div>
+        <div class="search-refinements"><div class="cuisine-options"><div class="chips" id="chips" aria-label="Cuisines and food types"></div><button type="button" class="chip cuisine-toggle" id="cuisine-toggle" aria-expanded="false" aria-controls="chips">See more +</button></div><button type="button" class="icon-btn" id="btn-filters">Filters</button></div>
       </div>
 
-      <div class="legend" id="legend">
-        <p class="kicker">Worth Going</p>
-        <p><span class="pin gold mini"></span> 3 · very worth it</p>
-        <p><span class="pin half mini"></span> 2 · consider</p>
-        <p><span class="pin grey mini"></span> 1 · if convenient</p>
-        <p><span class="tt-key">T</span> TikTok-led · glow = this week</p>
-      </div>
+      <details class="legend" id="legend"><summary>About map pins</summary><p>Gold: worth considering · grey: if convenient.</p><p>Signals and activity are demo data.</p></details>
 
       <aside class="drawer" id="drawer">
         <button type="button" class="drawer-handle" id="drawer-handle" aria-label="Resize recommendations"></button>
         <div class="drawer-head">
           <div>
-            <p class="kicker">TikTok-first · demo data</p>
-            <h2 id="drawer-title">Trending near you</h2>
+            <p class="kicker">Where should we eat?</p>
+            <h2 id="drawer-title">Recommended for you</h2>
           </div>
           <button type="button" class="text-btn" id="btn-collapse-drawer">Collapse</button>
         </div>
@@ -172,11 +158,11 @@
           </label>
 
           <h3>Customise UI</h3>
-          <label class="field">Orange accent
+          <label class="field">Coral accent
             <select id="pr-theme">
-              <option value="orange">Sunset orange</option>
-              <option value="terracotta">Peranakan terracotta</option>
-              <option value="citrus">Citrus</option>
+              <option value="orange">Signature coral</option>
+              <option value="terracotta">Rose coral</option>
+              <option value="citrus">Soft coral</option>
             </select>
           </label>
           <label class="field">Layout density
@@ -213,7 +199,7 @@
 
         <h3>About ratings</h3>
         <article class="news-card about-ratings">
-          <p>Outspoke uses a 1–3 <strong>Worth Going</strong> score, not a 5-star Google clone.</p>
+          <p>MakanMates uses a 1–3 <strong>Worth Going</strong> score, not a 5-star Google clone.</p>
           <ul>
             <li><strong>3 gold:</strong> strong recent TikTok interest, positive sentiment, excellent value or uniqueness.</li>
             <li><strong>2 half-gold:</strong> good social interest, a niche pick, or a solid option in its area.</li>
@@ -310,14 +296,9 @@
       </aside>
     </div>
 
-    <nav class="tabbar" aria-label="Mobile main menu">
-      <button type="button" data-tab="map" class="is-active">Map</button>
-      <button type="button" data-tab="news">Deals</button>
-      <button type="button" data-tab="foodies">Foodies</button>
-      <button type="button" data-tab="search">Search</button>
-      <button type="button" data-tab="chat">Chat</button>
-      <button type="button" data-tab="profile">Me</button>
-    </nav>
+    <nav class="tabbar" aria-label="Mobile main menu"><button type="button" data-tab="map" class="is-active">Discover</button>
+          <button type="button" data-tab="foodies">Community</button>
+          <button type="button" data-tab="profile">Saved &amp; me</button></nav>
 
     <template id="tpl-account">
       <h2 id="acc-title">Create a free account</h2>
@@ -355,7 +336,8 @@
       </div>
     </template>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.15.0/mapbox-gl.js"></script>
+    <script src="/mapbox-config.js"></script>
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
   </body>
