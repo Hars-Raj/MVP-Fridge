@@ -1,0 +1,17 @@
+const fs = require('fs');
+const assert = require('node:assert/strict');
+const vm = require('vm');
+const html = fs.readFileSync(__dirname + '/index.html','utf8');
+const code = fs.readFileSync(__dirname + '/js/app.js','utf8');
+const ids = [...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1]);
+assert.equal(new Set(ids).size, ids.length);
+for(const id of ['btn-hotzones','btn-crawl','btn-filters','chips','drawer','trending-carousel','list-pane']) assert(ids.includes(id));
+const context = {window:{},state:{userHere:[1.293,103.852]},haversine:()=>1,matchScore:()=>0};
+vm.createContext(context);
+vm.runInContext(fs.readFileSync(__dirname+'/js/data.js','utf8'), context);
+vm.runInContext('let discoveryMode="recommended";'+code.slice(code.indexOf('  function discoveryScore'),code.indexOf('  function renderTrending')),context);
+const names = () => context.window.FridgeData.eateries.slice().sort((a,b)=>context.discoveryScore(b)-context.discoveryScore(a)).map(p=>p.id).join(',');
+const recommendations = names();
+vm.runInContext('discoveryMode="trending"',context);
+assert.notEqual(recommendations,names());
+console.log('Hierarchy checks passed: controls preserved, unique IDs, distinct recommendation/trending ranking.');
