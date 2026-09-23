@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 104" role="img" aria-labelledby="title desc">
+  <title id="title">Outspoke</title>
+  <desc id="desc">Outspoke. Discover easily.</desc>
+  <rect width="260" height="104" rx="12" fill="#171719" />
+  <g fill="none" stroke="#e87922" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="50" cy="52" r="24" stroke-width="4" />
+    <circle cx="50" cy="52" r="7" stroke-width="3" />
+    <path stroke-width="3" d="M50 28v17m0 14v17M26 52h17m14 0h17M33 35l12 12m10 10 12 12M67 35 55 47M45 57 33 69" />
+    <circle cx="50" cy="21" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="50" cy="83" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="19" cy="52" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="81" cy="52" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="28" cy="30" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="72" cy="30" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="28" cy="74" r="3.5" fill="#e87922" stroke-width="2" />
+    <circle cx="72" cy="74" r="3.5" fill="#e87922" stroke-width="2" />
+    <path stroke-width="2" d="M99 14v76" />
+  </g>
+  <text x="117" y="43" fill="#e87922" font-family="Arial, sans-serif" font-size="31" font-weight="800" letter-spacing=".5">OUT•</text>
+  <text x="117" y="70" fill="#fff" font-family="Arial, sans-serif" font-size="27" font-weight="800" letter-spacing=".2">SPOKE</text>
+  <text x="118" y="89" fill="#fff" font-family="Georgia, serif" font-size="12" font-style="italic">Discover easily</text>
+</svg>

@@ -2,13 +2,361 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Outspoke — Discover food across Singapore</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Outfit:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main>
-      <h1>Hello world</h1>
-    </main>
+    <div id="app">
+      <div id="map" aria-label="Singapore food map"></div>
+      <aside id="list-pane" class="list-pane" hidden></aside>
+
+      <header class="topbar">
+        <button class="brand" id="btn-home" type="button" aria-label="Outspoke home">
+          <img class="brand-logo" src="assets/outspoke-logo.svg" alt="Outspoke — Discover easily" />
+        </button>
+        <nav class="desk-nav" aria-label="Main">
+          <button type="button" data-tab="map" class="is-active">Map</button>
+          <button type="button" data-tab="news">Promotions</button>
+          <button type="button" data-tab="foodies">Foodies</button>
+          <button type="button" data-tab="search">Search</button>
+          <button type="button" data-tab="chat">Chat</button>
+          <button type="button" data-tab="profile">Profile</button>
+        </nav>
+        <div class="top-actions">
+          <button type="button" class="ghost" id="btn-hotzones">Hotzones</button>
+          <button type="button" class="ghost" id="btn-crawl">Plan my food crawl</button>
+          <button type="button" class="icon-btn" id="btn-filters">Filters</button>
+        </div>
+      </header>
+
+      <div class="float-search" id="map-search-wrap">
+        <form id="crave-form" autocomplete="off">
+          <label class="sr-only" for="crave-input">What are you craving?</label>
+          <input id="crave-input" name="q" placeholder="What are you craving?" enterkeyhint="search" />
+          <button type="submit" class="go">Go</button>
+        </form>
+        <div class="chips" id="chips"></div>
+      </div>
+
+      <div class="legend" id="legend">
+        <p class="kicker">Worth Going</p>
+        <p><span class="pin gold mini"></span> 3 · very worth it</p>
+        <p><span class="pin half mini"></span> 2 · consider</p>
+        <p><span class="pin grey mini"></span> 1 · if convenient</p>
+        <p><span class="tt-key">T</span> TikTok-led · glow = this week</p>
+      </div>
+
+      <aside class="drawer" id="drawer">
+        <button type="button" class="drawer-handle" id="drawer-handle" aria-label="Resize recommendations"></button>
+        <div class="drawer-head">
+          <div>
+            <p class="kicker">TikTok-first · demo data</p>
+            <h2 id="drawer-title">Trending near you</h2>
+          </div>
+          <button type="button" class="text-btn" id="btn-collapse-drawer">Collapse</button>
+        </div>
+        <div class="carousel" id="trending-carousel"></div>
+      </aside>
+
+      <section class="view panel" id="panel" hidden>
+        <p class="kicker">News</p>
+        <h2>What’s on this week</h2>
+        <p class="muted">Promotions and social visits are labelled demo data until a live source is connected.</p>
+        <div class="row news-tabs">
+          <button type="button" class="chip is-on" data-news="promo">Latest promotions</button>
+          <button type="button" class="chip" data-news="new">Newest stores</button>
+          <button type="button" class="chip" data-news="friends">Friends ate here</button>
+          <button type="button" class="chip" data-news="foodies">Fellow foodies</button>
+        </div>
+        <div id="news-promos" class="grid news-block"></div>
+        <div id="news-new" class="grid news-block" hidden></div>
+        <div id="news-friends" class="grid news-block" hidden></div>
+        <div id="news-foodies" class="grid news-block" hidden></div>
+      </section>
+
+      <section class="view" id="view-search" hidden>
+        <p class="kicker">Search</p>
+        <h2>Find a craving</h2>
+        <form id="search-form" class="search-row">
+          <input
+            id="search-q"
+            placeholder="halal supper, Japanese omakase, best kaya toast, dessert near Bugis"
+          />
+          <button class="primary" type="submit">Search</button>
+        </form>
+        <label class="field">Prioritise
+          <select id="sort-select">
+            <option value="tiktok">TikTok Heat</option>
+            <option value="rating">Worth Going rating</option>
+            <option value="location">Distance</option>
+            <option value="affordability">Affordability</option>
+            <option value="instagram">Instagram popularity</option>
+            <option value="community">Fellow foodies</option>
+          </select>
+        </label>
+        <h3>History</h3>
+        <div class="chips" id="search-history"></div>
+        <h3>Trending</h3>
+        <div class="chips" id="search-trending"></div>
+        <h3>Last seen</h3>
+        <div class="grid" id="search-seen"></div>
+        <h3>Ranked results</h3>
+        <div class="grid" id="search-results"></div>
+      </section>
+
+      <section class="view" id="view-chat" hidden>
+        <p class="kicker">Chat</p>
+        <h2>Go with friends — or join a table</h2>
+        <p class="muted">Open groups exist if you don’t already have a makan chat. Restaurant booking is a demo request, not a live reservation.</p>
+        <div class="row">
+          <button type="button" class="primary" id="new-group">Create group</button>
+          <button type="button" class="secondary" data-tab="map">Find a place to book</button>
+        </div>
+        <div class="grid" id="group-list"></div>
+        <h3>Demo bookings</h3>
+        <div class="grid" id="booking-list"></div>
+      </section>
+
+      <section class="view" id="view-profile" hidden>
+        <p class="kicker">Profile</p>
+        <div class="profile-head">
+          <div class="avatar" id="profile-avatar">F</div>
+          <div>
+            <h2 id="profile-name">Guest</h2>
+            <p class="muted" id="profile-bio">Optional account. Customise food taste, UI, and visit privacy.</p>
+          </div>
+        </div>
+        <button type="button" class="primary" id="btn-account">Create account</button>
+
+        <form id="pref-form">
+          <h3>Food preferences</h3>
+          <label class="field">Usual budget
+            <select id="pr-budget">
+              <option value="any">Any</option>
+              <option value="budget">Budget / hawker ≤ $15</option>
+              <option value="mid">Mid $16–45</option>
+              <option value="splurge">Splurge $45+</option>
+            </select>
+          </label>
+          <label class="field">I prefer
+            <select id="pr-vibe">
+              <option value="viral">Viral spots</option>
+              <option value="hidden">Hidden gems</option>
+              <option value="classic" selected>Classic favourites</option>
+            </select>
+          </label>
+          <fieldset class="checks">
+            <legend>Dietary needs</legend>
+            <label><input type="checkbox" class="pr-diet" value="halal" /> Halal</label>
+            <label><input type="checkbox" class="pr-diet" value="muslim-friendly" /> Muslim-friendly</label>
+            <label><input type="checkbox" class="pr-diet" value="vegetarian" /> Vegetarian</label>
+          </fieldset>
+          <label class="field">Favourite cuisines
+            <input id="pr-cui" placeholder="Japanese, Malay, Café" />
+          </label>
+          <label class="field">Preferred Singapore areas
+            <input id="pr-areas" placeholder="Joo Chiat, Chinatown, Punggol" />
+          </label>
+
+          <h3>Customise UI</h3>
+          <label class="field">Orange accent
+            <select id="pr-theme">
+              <option value="orange">Sunset orange</option>
+              <option value="terracotta">Peranakan terracotta</option>
+              <option value="citrus">Citrus</option>
+            </select>
+          </label>
+          <label class="field">Layout density
+            <select id="pr-den">
+              <option value="comfortable">Comfortable</option>
+              <option value="compact">Compact</option>
+            </select>
+          </label>
+
+          <h3>Privacy</h3>
+          <label class="field">Profile visibility
+            <select id="pr-vis">
+              <option value="public">Public</option>
+              <option value="followers">Followers only</option>
+              <option value="private">Private</option>
+            </select>
+          </label>
+          <label class="field">Visit sharing
+            <select id="pr-visit">
+              <option value="public">Public</option>
+              <option value="followers">Followers only</option>
+              <option value="private">Private</option>
+            </select>
+          </label>
+          <button type="submit" class="primary">Save preferences</button>
+        </form>
+
+        <h3>Bookmarks &amp; landmarks</h3>
+        <div class="grid" id="bookmark-lists"></div>
+        <form class="search-row" id="new-list">
+          <input name="n" placeholder="New collection name" />
+          <button class="secondary" type="submit">Add list</button>
+        </form>
+
+        <h3>About ratings</h3>
+        <article class="news-card about-ratings">
+          <p>Outspoke uses a 1–3 <strong>Worth Going</strong> score, not a 5-star Google clone.</p>
+          <ul>
+            <li><strong>3 gold:</strong> strong recent TikTok interest, positive sentiment, excellent value or uniqueness.</li>
+            <li><strong>2 half-gold:</strong> good social interest, a niche pick, or a solid option in its area.</li>
+            <li><strong>1 grey:</strong> visit only if convenient — possibly viral, inconsistent, or overhyped.</li>
+          </ul>
+          <p>TikTok is weighted first, Instagram second. Google Reviews are not the primary ranking signal. Viral and worth-it are shown separately. TikTok Heat blends recency and popularity so a place trending this week looks different from a long-standing classic. All social and promo figures in this build are <strong>demo data</strong> until a verified data service is connected.</p>
+        </article>
+        <p class="muted" id="profile-stats"></p>
+        <button type="button" class="secondary" id="btn-reset">Clear local data</button>
+      </section>
+
+      <section class="view" id="view-details" hidden></section>
+
+      <article class="sheet" id="sheet" hidden></article>
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+      <div class="modal" id="modal" hidden>
+        <div class="box" id="modal-box"></div>
+      </div>
+
+      <aside class="sheet filter-sheet" id="filter-sheet" hidden>
+        <div class="content">
+          <p class="kicker">Filter pins &amp; lists</p>
+          <h2>Narrow the map</h2>
+          <div class="filter-grid">
+            <label class="field">Neighbourhood
+              <select id="f-n"><option value="">Anywhere</option></select>
+            </label>
+            <label class="field">Distance
+              <select id="f-d">
+                <option value="">Any</option>
+                <option value="2">Under 2 km</option>
+                <option value="5">Under 5 km</option>
+                <option value="10">Under 10 km</option>
+              </select>
+            </label>
+            <label class="field">Worth Going
+              <select id="f-s" multiple size="3">
+                <option value="3">3 gold — very worth going</option>
+                <option value="2">2 half-gold — consider</option>
+                <option value="1">1 grey — if convenient</option>
+              </select>
+            </label>
+            <label class="field">Affordability
+              <select id="f-p">
+                <option value="">Any</option>
+                <option value="budget">Budget ≤ $15</option>
+                <option value="mid">$16–45</option>
+                <option value="splurge">$45+</option>
+              </select>
+            </label>
+            <label class="field">Cuisine
+              <select id="f-c"><option value="">Any</option></select>
+            </label>
+            <label class="field">Venue type
+              <select id="f-v">
+                <option value="">Any</option>
+                <option value="hawker">Hawker centre / stall</option>
+                <option value="cafe">Café</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="bar">Bar</option>
+                <option value="fine-dining">Fine dining</option>
+              </select>
+            </label>
+            <label class="field">TikTok Heat
+              <select id="f-h">
+                <option value="">Any</option>
+                <option value="high">High heat</option>
+                <option value="week">This week / newly viral</option>
+              </select>
+            </label>
+            <label class="field">Instagram
+              <select id="f-i">
+                <option value="">Any</option>
+                <option value="high">High popularity</option>
+              </select>
+            </label>
+          </div>
+          <label class="field check"><input type="checkbox" id="f-open" /> Open now (from listed hours)</label>
+          <label class="field check"><input type="checkbox" id="f-promo" /> Promotions / 2-for-1 (demo)</label>
+          <label class="field check"><input type="checkbox" id="f-com" /> Visited by fellow foodies</label>
+          <label class="field check"><input type="checkbox" id="f-late" /> Late-night food</label>
+          <fieldset class="checks">
+            <legend>Dietary</legend>
+            <label><input type="checkbox" class="f-diet" value="halal" /> Halal</label>
+            <label><input type="checkbox" class="f-diet" value="muslim-friendly" /> Muslim-friendly</label>
+            <label><input type="checkbox" class="f-diet" value="vegetarian" /> Vegetarian</label>
+          </fieldset>
+          <div class="row">
+            <button type="button" class="primary" id="f-apply">Apply</button>
+            <button type="button" class="secondary" id="f-clear">Clear</button>
+            <button type="button" class="text-btn" id="f-close">Close</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <nav class="tabbar" aria-label="Mobile main menu">
+      <button type="button" data-tab="map" class="is-active">Map</button>
+      <button type="button" data-tab="news">Deals</button>
+      <button type="button" data-tab="foodies">Foodies</button>
+      <button type="button" data-tab="search">Search</button>
+      <button type="button" data-tab="chat">Chat</button>
+      <button type="button" data-tab="profile">Me</button>
+    </nav>
+
+    <template id="tpl-account">
+      <h2 id="acc-title">Create a free account</h2>
+      <p class="muted">Local demo account. A future auth service can replace this.</p>
+      <label class="field">Name <input id="p-name" /></label>
+      <label class="field">Bio <textarea id="p-bio"></textarea></label>
+      <label class="field">Avatar URL <input id="p-av" placeholder="https://…" /></label>
+      <div class="row">
+        <button type="button" class="primary" id="p-save">Save &amp; continue</button>
+        <button type="button" class="secondary" id="p-x">Not now</button>
+      </div>
+    </template>
+
+    <template id="tpl-group">
+      <h2>New group</h2>
+      <label class="field">Name <input id="gn" placeholder="Tuesday hawker hop" /></label>
+      <label class="field">Topic <input id="gt" placeholder="Anyone welcome — no existing friends required" /></label>
+      <div class="row">
+        <button type="button" class="primary" id="gc">Create</button>
+        <button type="button" class="secondary" id="gx">Cancel</button>
+      </div>
+    </template>
+
+    <template id="tpl-booking">
+      <p class="kicker">Demo reservation</p>
+      <h2 id="bk-title">Book a table</h2>
+      <p class="muted">This does not contact the restaurant.</p>
+      <label class="field">Date <input type="date" id="bk-date" /></label>
+      <label class="field">Time <input type="time" id="bk-time" value="19:00" /></label>
+      <label class="field">Pax <input type="number" id="bk-pax" min="1" max="12" value="2" /></label>
+      <label class="field">Notes <textarea id="bk-notes" placeholder="Window seat, high chair…"></textarea></label>
+      <div class="row">
+        <button type="button" class="primary" id="bk-send">Send request</button>
+        <button type="button" class="secondary" id="bk-cancel">Cancel</button>
+      </div>
+    </template>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
