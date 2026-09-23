@@ -18,7 +18,20 @@ http.createServer((request, response) => {
     response.end(`window.MAPBOX_ACCESS_TOKEN = ${JSON.stringify(process.env.MAPBOX_ACCESS_TOKEN || '')};`);
     return;
   }
-  const filePath = request.url === '/' ? 'index.html' : request.url.slice(1);
+  if (request.url === '/app-config.js') {
+    response.writeHead(200, { 'Content-Type': 'application/javascript', 'Cache-Control': 'no-store' });
+    response.end('window.APP_CONFIG = ' + JSON.stringify({
+      url: process.env.SUPABASE_URL || '',
+      key: process.env.SUPABASE_PUBLISHABLE_KEY || ''
+    }) + ';');
+    return;
+  }
+  const pathname = new URL(request.url, 'http://localhost').pathname;
+  const allowed = new Set(['/index.html','/styles.css','/app.js','/accounts.js','/places.json']);
+  if (pathname !== '/' && !allowed.has(pathname)) {
+    response.writeHead(404); response.end('Not found'); return;
+  }
+  const filePath = pathname === '/' ? 'index.html' : pathname.slice(1);
   const safePath = path.join(__dirname, filePath);
 
   if (!safePath.startsWith(__dirname) || !fs.existsSync(safePath)) {
@@ -27,7 +40,7 @@ http.createServer((request, response) => {
     return;
   }
 
-  const type = safePath.endsWith('.css') ? 'text/css' : 'text/html';
+  const type = {'.css':'text/css','.js':'application/javascript','.json':'application/json','.html':'text/html'}[path.extname(safePath)];
   response.writeHead(200, { 'Content-Type': `${type}; charset=utf-8` });
   fs.createReadStream(safePath).pipe(response);
 }).listen(port, () => {

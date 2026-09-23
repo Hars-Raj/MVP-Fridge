@@ -1,0 +1,1820 @@
+[
+  {
+    "id": "sg-001",
+    "name": "Tian Tian Hainanese Chicken Rice",
+    "category": "Food",
+    "cuisine": "Singaporean / Chicken Rice",
+    "address": "Maxwell Food Centre, 1 Kadayanallur Street, Singapore 069184",
+    "price_level": 1,
+    "tags": [
+      "chicken-rice",
+      "hawker",
+      "local-favourite",
+      "lunch",
+      "iconic",
+      "budget"
+    ],
+    "description": "Famous Hainanese chicken rice stall at Maxwell Food Centre. Strong candidate for the app's initial iconic Singapore food content.",
+    "source": "MICHELIN Guide 2026 / current local listings",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-001-demo-1",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-001-demo-2",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-001-demo-3",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-001-demo-4",
+        "author": "Arun (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-002",
+    "name": "A Noodle Story",
+    "category": "Food",
+    "cuisine": "Noodles",
+    "address": "7 Maxwell Road, #01-39, Singapore 069111",
+    "price_level": 1,
+    "tags": [
+      "noodles",
+      "hawker",
+      "local-favourite",
+      "budget",
+      "lunch"
+    ],
+    "description": "Popular noodle stall at Maxwell Food Centre.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-002-demo-1",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-002-demo-2",
+        "author": "Jia (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-002-demo-3",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-002-demo-4",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-003",
+    "name": "Song Fa Bak Kut Teh",
+    "category": "Food",
+    "cuisine": "Singaporean / Bak Kut Teh",
+    "address": "11 New Bridge Road, Singapore 059383",
+    "price_level": 2,
+    "tags": [
+      "bak-kut-teh",
+      "pork",
+      "local-favourite",
+      "dinner",
+      "supper",
+      "iconic"
+    ],
+    "description": "Well-known Singapore bak kut teh institution with multiple outlets.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-003-demo-1",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-003-demo-2",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-003-demo-3",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-003-demo-4",
+        "author": "Sam (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-004",
+    "name": "The Coconut Club Beach Road",
+    "category": "Restaurant",
+    "cuisine": "Malay / Singaporean",
+    "address": "269 Beach Road, Singapore 199546",
+    "price_level": 2,
+    "tags": [
+      "nasi-lemak",
+      "malay",
+      "group-friendly",
+      "dinner",
+      "brunch",
+      "popular"
+    ],
+    "description": "Popular restaurant specialising in nasi lemak and coconut-based dishes.",
+    "source": "Time Out Singapore 2026 / current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-004-demo-1",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-004-demo-2",
+        "author": "Nadia (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-004-demo-3",
+        "author": "Sam (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-004-demo-4",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-005",
+    "name": "Boon Tong Kee",
+    "category": "Restaurant",
+    "cuisine": "Chinese / Chicken Rice",
+    "address": "399 Balestier Road, Singapore 329801",
+    "price_level": 2,
+    "tags": [
+      "chicken-rice",
+      "chinese",
+      "group-friendly",
+      "dinner",
+      "local-favourite"
+    ],
+    "description": "Long-running Singapore chicken rice restaurant.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-005-demo-1",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-005-demo-2",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-005-demo-3",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-005-demo-4",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-006",
+    "name": "JUMBO Seafood",
+    "category": "Restaurant",
+    "cuisine": "Chinese / Seafood",
+    "address": "2 Orchard Turn, #04-09/10, ION Orchard, Singapore 238801",
+    "price_level": 3,
+    "tags": [
+      "seafood",
+      "crab",
+      "group-friendly",
+      "family",
+      "dinner",
+      "popular"
+    ],
+    "description": "Established Singapore seafood restaurant group, useful as a higher-price group dining option.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-006-demo-1",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-006-demo-2",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-006-demo-3",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-006-demo-4",
+        "author": "Daniel (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-007",
+    "name": "My Awesome Cafe",
+    "category": "Cafe",
+    "cuisine": "Cafe / Local / International",
+    "address": "202 Telok Ayer Street, Singapore 068639",
+    "price_level": 2,
+    "tags": [
+      "cafe",
+      "brunch",
+      "group-friendly",
+      "casual",
+      "lunch",
+      "dinner"
+    ],
+    "description": "Popular Telok Ayer cafe/restaurant suitable for casual meals and social hangouts.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-007-demo-1",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-007-demo-2",
+        "author": "Maya (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-007-demo-3",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-007-demo-4",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-008",
+    "name": "Nylon Coffee Roasters",
+    "category": "Cafe",
+    "cuisine": "Coffee",
+    "address": "4 Everton Park, #01-40, Singapore 080004",
+    "price_level": 1,
+    "tags": [
+      "coffee",
+      "cafe",
+      "neighbourhood",
+      "casual",
+      "budget",
+      "hidden-gem"
+    ],
+    "description": "Small specialty coffee shop in Everton Park.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-008-demo-1",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-008-demo-2",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-008-demo-3",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-008-demo-4",
+        "author": "Arun (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-009",
+    "name": "Tiong Bahru Bakery",
+    "category": "Cafe",
+    "cuisine": "Bakery / French-inspired",
+    "address": "56 Eng Hoon Street, #01-70, Singapore 160056",
+    "price_level": 2,
+    "tags": [
+      "bakery",
+      "cafe",
+      "coffee",
+      "brunch",
+      "aesthetic",
+      "hangout"
+    ],
+    "description": "Well-known bakery and cafe in Tiong Bahru.",
+    "source": "Current business listing / Singapore cafe guides",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-009-demo-1",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-009-demo-2",
+        "author": "Jia (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-009-demo-3",
+        "author": "Arun (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-009-demo-4",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-010",
+    "name": "Common Man Coffee Roasters",
+    "category": "Cafe",
+    "cuisine": "Coffee / Brunch",
+    "address": "22 Martin Road, #01-00, Singapore 239058",
+    "price_level": 2,
+    "tags": [
+      "coffee",
+      "brunch",
+      "cafe",
+      "aesthetic",
+      "hangout",
+      "work-friendly"
+    ],
+    "description": "Popular specialty coffee and brunch destination.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-010-demo-1",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-010-demo-2",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-010-demo-3",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-010-demo-4",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-011",
+    "name": "Chin Mee Chin Confectionery",
+    "category": "Cafe",
+    "cuisine": "Singaporean / Bakery",
+    "address": "204 East Coast Road, Singapore 428903",
+    "price_level": 1,
+    "tags": [
+      "bakery",
+      "traditional",
+      "breakfast",
+      "cafe",
+      "local-favourite",
+      "east"
+    ],
+    "description": "Traditional confectionery and breakfast spot in Katong/East Coast.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-011-demo-1",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-011-demo-2",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-011-demo-3",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-011-demo-4",
+        "author": "Leah (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-012",
+    "name": "Wildseed Cafe at The Garage",
+    "category": "Cafe",
+    "cuisine": "Cafe / Brunch",
+    "address": "50 Cluny Park Road, Singapore Botanic Gardens, Singapore 257488",
+    "price_level": 2,
+    "tags": [
+      "cafe",
+      "brunch",
+      "nature",
+      "date",
+      "aesthetic",
+      "hangout",
+      "outdoors"
+    ],
+    "description": "Cafe located within Singapore Botanic Gardens, combining food with a greenery-focused hangout setting.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-012-demo-1",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-012-demo-2",
+        "author": "Sam (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-012-demo-3",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-012-demo-4",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-013",
+    "name": "Kurasu Singapore",
+    "category": "Cafe",
+    "cuisine": "Japanese / Coffee",
+    "address": "261 Waterloo Street, #01-24, Singapore 180261",
+    "price_level": 2,
+    "tags": [
+      "coffee",
+      "japanese",
+      "cafe",
+      "aesthetic",
+      "quiet",
+      "hangout"
+    ],
+    "description": "Japanese specialty coffee concept in the Waterloo area.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-013-demo-1",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-013-demo-2",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-013-demo-3",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-013-demo-4",
+        "author": "Daniel (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-014",
+    "name": "Brunches Cafe",
+    "category": "Cafe",
+    "cuisine": "Cafe / Brunch",
+    "address": "96 Rangoon Road, Singapore 218381",
+    "price_level": 2,
+    "tags": [
+      "brunch",
+      "cafe",
+      "group-friendly",
+      "casual",
+      "hangout"
+    ],
+    "description": "Popular brunch-oriented cafe in the Rangoon Road area.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-014-demo-1",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-014-demo-2",
+        "author": "Maya (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-014-demo-3",
+        "author": "Daniel (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-014-demo-4",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-015",
+    "name": "2am: dessertbar",
+    "category": "Dessert",
+    "cuisine": "Dessert",
+    "address": "21A Lorong Liput, Singapore 277733",
+    "price_level": 3,
+    "tags": [
+      "dessert",
+      "supper",
+      "date",
+      "late-night",
+      "aesthetic",
+      "hangout"
+    ],
+    "description": "Dessert destination known for late-night dining.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-015-demo-1",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-015-demo-2",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-015-demo-3",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-015-demo-4",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-016",
+    "name": "Lagnaa...barefoot dining",
+    "category": "Restaurant",
+    "cuisine": "Indian",
+    "address": "6 Upper Dickson Road, Singapore 207466",
+    "price_level": 2,
+    "tags": [
+      "indian",
+      "group-friendly",
+      "dinner",
+      "unique-experience",
+      "little-india"
+    ],
+    "description": "Indian restaurant in Little India with a distinctive dining concept.",
+    "source": "MICHELIN Guide 2026 / current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-016-demo-1",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-016-demo-2",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-016-demo-3",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-016-demo-4",
+        "author": "Nadia (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-017",
+    "name": "Sungei Road Laksa",
+    "category": "Hawker Stall",
+    "cuisine": "Laksa",
+    "address": "27 Jalan Berseh, #01-100, Singapore 200027",
+    "price_level": 1,
+    "tags": [
+      "laksa",
+      "hawker",
+      "local-favourite",
+      "budget",
+      "heritage"
+    ],
+    "description": "Long-running laksa stall near Jalan Berseh.",
+    "source": "Current business listing / local food guides",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-017-demo-1",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-017-demo-2",
+        "author": "Arun (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-017-demo-3",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-017-demo-4",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-018",
+    "name": "Maxwell Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "1 Kadayanallur Street, Singapore 069184",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "group-friendly",
+      "food-hunting",
+      "iconic"
+    ],
+    "description": "Major Singapore hawker centre with a large concentration of local food stalls.",
+    "source": "MICHELIN Guide Singapore",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-018-demo-1",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-018-demo-2",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-018-demo-3",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-018-demo-4",
+        "author": "Leah (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-019",
+    "name": "Old Airport Road Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "51 Old Airport Road, Singapore 390051",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "food-hunting",
+      "east",
+      "iconic"
+    ],
+    "description": "Large and well-known hawker centre with a broad selection of local dishes.",
+    "source": "Current business listing / MICHELIN hawker centre guide",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-019-demo-1",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-019-demo-2",
+        "author": "Sam (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-019-demo-3",
+        "author": "Leah (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-019-demo-4",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-020",
+    "name": "Chomp Chomp Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "20 Kensington Park Road, Singapore 557269",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "supper",
+      "bbq",
+      "seafood",
+      "satay",
+      "group-friendly",
+      "night"
+    ],
+    "description": "Popular evening hawker centre in Serangoon Gardens.",
+    "source": "Current business listing / MICHELIN hawker centre coverage",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-020-demo-1",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-020-demo-2",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-020-demo-3",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-020-demo-4",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-021",
+    "name": "Lau Pa Sat",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "18 Raffles Quay, Singapore 048582",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "supper",
+      "satay",
+      "cbd",
+      "late-night",
+      "tourist-friendly",
+      "iconic"
+    ],
+    "description": "Historic hawker centre in the CBD, known especially for its evening satay area.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-021-demo-1",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-021-demo-2",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-021-demo-3",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-021-demo-4",
+        "author": "Jia (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-022",
+    "name": "Golden Mile Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "505 Beach Road, Singapore 199583",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "food-hunting",
+      "hidden-gem"
+    ],
+    "description": "Established hawker centre with a wide range of local stalls.",
+    "source": "Current business listing / Singapore food guides",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-022-demo-1",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-022-demo-2",
+        "author": "Daniel (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-022-demo-3",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-022-demo-4",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-023",
+    "name": "Hong Lim Market & Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "531A Upper Cross Street, Singapore 051531",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "lunch",
+      "cbd"
+    ],
+    "description": "Central Singapore hawker centre known for local noodle and rice dishes.",
+    "source": "Current business listing / MICHELIN Guide",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-023-demo-1",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-023-demo-2",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-023-demo-3",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-023-demo-4",
+        "author": "Nadia (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-024",
+    "name": "Changi Village Hawker Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "2 Changi Village Road, Singapore 500002",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "east",
+      "supper",
+      "group-friendly"
+    ],
+    "description": "East-side hawker centre that can serve as a destination for local food discovery.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-024-demo-1",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-024-demo-2",
+        "author": "Arun (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-024-demo-3",
+        "author": "Nadia (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-024-demo-4",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-025",
+    "name": "Zion Riverside Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "70 Zion Road, Singapore 247792",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "riverside",
+      "casual",
+      "group-friendly"
+    ],
+    "description": "Riverside hawker centre near the Orchard/River Valley area.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-025-demo-1",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-025-demo-2",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-025-demo-3",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-025-demo-4",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-026",
+    "name": "Amoy Street Food Centre",
+    "category": "Hawker Centre",
+    "cuisine": "Multiple",
+    "address": "7 Maxwell Road, Singapore 069111",
+    "price_level": 1,
+    "tags": [
+      "hawker",
+      "local-food",
+      "budget",
+      "cbd",
+      "lunch",
+      "food-hunting"
+    ],
+    "description": "CBD hawker centre with a mix of traditional and modern stalls.",
+    "source": "Current business listing",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-026-demo-1",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-026-demo-2",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-026-demo-3",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-026-demo-4",
+        "author": "Maya (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-027",
+    "name": "Boon Keng Road Fish Head Bee Hoon",
+    "category": "Hawker Stall",
+    "cuisine": "Fish Soup / Noodles",
+    "address": "Blk 416, #01-53, Bedok North Avenue 2, Singapore 460416",
+    "price_level": 1,
+    "tags": [
+      "fish-soup",
+      "noodles",
+      "hawker",
+      "budget",
+      "east",
+      "local-favourite"
+    ],
+    "description": "Fish head bee hoon stall recognised as a new MICHELIN Bib Gourmand recipient in 2026.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-027-demo-1",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-027-demo-2",
+        "author": "Leah (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-027-demo-3",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-027-demo-4",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-028",
+    "name": "Rajarani Thosai",
+    "category": "Hawker Stall",
+    "cuisine": "Indian / Thosai",
+    "address": "Tampines Round Market & Food Centre, #01-33, 137 Tampines Street 11, Singapore 521137",
+    "price_level": 1,
+    "tags": [
+      "thosai",
+      "indian",
+      "hawker",
+      "budget",
+      "east",
+      "vegetarian-friendly"
+    ],
+    "description": "Thosai and appam specialist recognised as a new MICHELIN Bib Gourmand recipient in 2026.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-028-demo-1",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-028-demo-2",
+        "author": "Maya (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-028-demo-3",
+        "author": "Daniel (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-028-demo-4",
+        "author": "Jia (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-029",
+    "name": "Seng Kee Black Chicken Herbal Soup",
+    "category": "Hawker Stall",
+    "cuisine": "Chinese / Herbal Soup",
+    "address": "Kaki Bukit 511 Market & Food Centre, #01-31/32, 511 Bedok North Street 3, Singapore 460511",
+    "price_level": 1,
+    "tags": [
+      "soup",
+      "chinese",
+      "hawker",
+      "budget",
+      "east",
+      "heritage",
+      "supper"
+    ],
+    "description": "Long-running herbal soup specialist recognised as a new MICHELIN Bib Gourmand recipient in 2026.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-029-demo-1",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-029-demo-2",
+        "author": "Daniel (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-029-demo-3",
+        "author": "Jia (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-029-demo-4",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-030",
+    "name": "Tian Nan Xing Minced Pork Noodle",
+    "category": "Hawker Stall",
+    "cuisine": "Noodles / Bak Chor Mee",
+    "address": "Kaki Bukit 511 Market & Food Centre, #01-10, 511 Bedok North Street 3, Singapore 460511",
+    "price_level": 1,
+    "tags": [
+      "noodles",
+      "bak-chor-mee",
+      "hawker",
+      "budget",
+      "east",
+      "heritage"
+    ],
+    "description": "Multi-generation minced pork noodle stall recognised as a new MICHELIN Bib Gourmand recipient in 2026.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-030-demo-1",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-030-demo-2",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-030-demo-3",
+        "author": "Arun (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-030-demo-4",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-031",
+    "name": "Hup Kee Fried Oyster Omelette",
+    "category": "Hawker Stall",
+    "cuisine": "Oyster Omelette",
+    "address": "Newton Food Centre, #01-73, 500 Clemenceau Avenue North, Singapore 229495",
+    "price_level": 1,
+    "tags": [
+      "oyster-omelette",
+      "hawker",
+      "budget",
+      "supper",
+      "local-food",
+      "heritage"
+    ],
+    "description": "Long-running oyster omelette specialist and 2026 MICHELIN Bib Gourmand recipient.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-031-demo-1",
+        "author": "Jia (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-031-demo-2",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-031-demo-3",
+        "author": "Nadia (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-031-demo-4",
+        "author": "Sam (demo)",
+        "rating": 3,
+        "text": "An okay visit for me. The flavours were not quite to my taste.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-032",
+    "name": "Yi Pin Wei Braised Duck Kway Chap",
+    "category": "Hawker Stall",
+    "cuisine": "Teochew / Kway Chap",
+    "address": "Singapore",
+    "price_level": 1,
+    "tags": [
+      "kway-chap",
+      "duck",
+      "teochew",
+      "hawker",
+      "budget",
+      "local-food"
+    ],
+    "description": "Teochew-style braised duck and kway chap specialist recognised in the MICHELIN Guide Singapore 2026 Bib Gourmand selection.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-032-demo-1",
+        "author": "Arun (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-032-demo-2",
+        "author": "Nadia (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-032-demo-3",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-032-demo-4",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-033",
+    "name": "Bismillah Biryani",
+    "category": "Hawker Stall",
+    "cuisine": "Indian / Biryani",
+    "address": "Little India, Singapore",
+    "price_level": 1,
+    "tags": [
+      "biryani",
+      "indian",
+      "halal",
+      "hawker",
+      "budget",
+      "little-india",
+      "heritage"
+    ],
+    "description": "Long-established biryani specialist and one of the establishments retaining MICHELIN Bib Gourmand recognition across all ten Singapore editions.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-033-demo-1",
+        "author": "Nadia (demo)",
+        "rating": 5,
+        "text": "One of my favourites from this food crawl. Would happily return.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-033-demo-2",
+        "author": "Sam (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-033-demo-3",
+        "author": "Leah (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-033-demo-4",
+        "author": "Maya (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-034",
+    "name": "Kok Sen",
+    "category": "Restaurant",
+    "cuisine": "Chinese / Zi Char",
+    "address": "Keong Saik Road area, Singapore",
+    "price_level": 2,
+    "tags": [
+      "zi-char",
+      "chinese",
+      "group-friendly",
+      "dinner",
+      "heritage",
+      "local-favourite"
+    ],
+    "description": "Long-running Singapore zi char restaurant and MICHELIN Bib Gourmand mainstay.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-034-demo-1",
+        "author": "Sam (demo)",
+        "rating": 4,
+        "text": "Enjoyed the food overall, though I would prefer a slightly bigger portion.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-034-demo-2",
+        "author": "Leah (demo)",
+        "rating": 3,
+        "text": "Some parts of the meal were better than others. Worth trying once.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-034-demo-3",
+        "author": "Maya (demo)",
+        "rating": 3,
+        "text": "Decent, but I was hoping for a little more for the price.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-034-demo-4",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      }
+    ]
+  },
+  {
+    "id": "sg-035",
+    "name": "Muthu's Curry",
+    "category": "Restaurant",
+    "cuisine": "Indian",
+    "address": "Little India, Singapore",
+    "price_level": 2,
+    "tags": [
+      "indian",
+      "curry",
+      "group-friendly",
+      "dinner",
+      "little-india",
+      "local-food"
+    ],
+    "description": "Established Indian restaurant known for curry and South Indian food.",
+    "source": "MICHELIN Guide 2026",
+    "latitude": null,
+    "longitude": null,
+    "cover_image": null,
+    "seed": true,
+    "demo_reviews": [
+      {
+        "id": "sg-035-demo-1",
+        "author": "Leah (demo)",
+        "rating": 5,
+        "text": "A satisfying meal and a lovely stop on a food outing.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-035-demo-2",
+        "author": "Maya (demo)",
+        "rating": 4,
+        "text": "Tasty overall. I would come back to try something different next time.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-035-demo-3",
+        "author": "Daniel (demo)",
+        "rating": 5,
+        "text": "Really enjoyed the flavours. This would be on my list for another visit.",
+        "is_demo": true
+      },
+      {
+        "id": "sg-035-demo-4",
+        "author": "Jia (demo)",
+        "rating": 4,
+        "text": "A good choice for a casual stop. A few dishes stood out more than others.",
+        "is_demo": true
+      }
+    ]
+  }
+]
