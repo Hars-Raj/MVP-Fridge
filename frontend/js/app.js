@@ -251,8 +251,8 @@
   }
 
   function starsHtml(n, grey) {
-    const filled = '★'.repeat(n) + '☆'.repeat(3 - n);
-    return `<span class="stars ${grey && n === 1 ? 'grey' : ''}" title="${n} star Worth Going">${filled}</span>`;
+    const label = ['If convenient', 'Worth considering', 'Highly recommended'][Math.max(0, Math.min(2, n - 1))];
+    return `<span class="badge">${label}${grey ? '' : ' · demo'}</span>`;
   }
 
   function recencyLabel(e) {
@@ -487,8 +487,8 @@
         <p><strong>Why people are going:</strong> ${e.whyTrending}</p>
         </details><p><strong>Why consider it:</strong> ${e.whyWorthGoing}</p>
         <p class="muted">${e.sentiment}</p>
+        <p class="muted">Community rating: ${e.communityScore}/5 (demo)</p>
         <div class="row" style="margin-top:12px">
-          <button type="button" class="primary" data-details="${e.id}">Full details</button>
           <button type="button" class="secondary" data-bookmark="${e.id}">${bm ? 'Bookmarked' : 'Bookmark'}</button>
           <details class="plan-options"><summary>Plan a visit</summary><button type="button" class="secondary" data-add-crawl="${e.id}">Add to crawl</button>
           <button type="button" class="secondary" data-share="${e.id}">Share place</button>
@@ -501,36 +501,39 @@
   }
 
   function openDetails(id) {
-    const e = byId(id);
-    showTab('news');
-    panel.hidden = false;
-    panel.innerHTML = `
-      <p class="kicker">Eatery details</p>
-      <h2>${e.name}</h2>
-      <img src="${e.photo}" alt="" style="width:min(720px,100%);height:280px;object-fit:cover;border-radius:18px">
-      ${e.hawkerCentre ? `<p>Hawker centre: <strong>${e.hawkerCentre}</strong> · Stall: ${e.stallName}</p>` : ''}
-      <p>Neighbourhood: ${e.neighbourhood} · ${e.address}</p>
-      <p>Hours: ${e.hours} · Est. ${e.priceLabel}</p>
-      <p>${starsHtml(e.worthGoing)} Worth Going · Community ${e.communityScore}/5 (demo)</p>
-      <h3>About this rating</h3>
-      <p>TikTok is the top ranking signal, Instagram is second. A place can be very viral and still score 1–2 stars when queues, inconsistency, or overhype show up in social sentiment. Scores mix current buzz with perceived value. Popularity moves quickly; treat this as a snapshot, not a live verified metric.</p>
-      <p><strong>Why it’s trending:</strong> ${e.whyTrending}</p>
-      <p><strong>Why it’s worth going:</strong> ${e.whyWorthGoing}</p>
-      <div class="row">
-        <button class="primary" data-bookmark="${e.id}">${isBookmarked(e.id) ? 'Bookmarked' : 'Bookmark'}</button>
-        <button class="secondary" data-add-crawl="${e.id}">Add to food crawl</button>
-        <button class="secondary" data-share="${e.id}">Share place</button>
-        <button class="secondary" data-book="${e.id}">Request a table</button>
-        <button class="secondary" data-tab="map">Back to map</button>
-      </div>`;
-    panel.querySelector('[data-bookmark]').onclick = (ev) => toggleBookmark(ev.currentTarget.dataset.bookmark);
-    panel.querySelector('[data-add-crawl]').onclick = (ev) => addToCrawl(ev.currentTarget.dataset.addCrawl);
-    panel.querySelector('[data-book]').onclick = (ev) => openBooking(ev.currentTarget.dataset.book);
-    panel.querySelector('[data-share]').onclick = (ev) => sharePlace(ev.currentTarget.dataset.share);
-    panel.querySelector('[data-tab="map"]').onclick = () => showTab('map');
+    openCard(id);
   }
 
   function bindSheet() {
+    const isPlace = !!sheet.querySelector('.hero');
+    sheet.classList.toggle('place-detail', isPlace);
+    const bookmark = sheet.querySelector('[data-bookmark]');
+    if (bookmark) {
+      const actions = document.createElement('div');
+      actions.className = 'place-actions';
+      actions.appendChild(bookmark);
+      const directions = sheet.querySelector('a[href*="/maps/dir/"]');
+      if (directions) actions.appendChild(directions);
+      sheet.appendChild(actions);
+      bookmark.className = 'primary';
+    }
+    sheet.querySelectorAll('[data-close-sheet]').forEach(b => b.remove());
+    sheet.insertAdjacentHTML('afterbegin', '<div class="sheet-toolbar"><button type="button" class="close-x" data-close-sheet aria-label="Close panel">&times;</button></div>');
+    if (isPlace) {
+      const title = sheet.querySelector('h1');
+      title.id = 'place-detail-title';
+      sheet.setAttribute('aria-labelledby', title.id);
+      const scroll = document.createElement('div');
+      scroll.className = 'place-detail-scroll';
+      scroll.append(sheet.querySelector('.hero'), sheet.querySelector('.content'));
+      sheet.querySelector('.sheet-toolbar').after(scroll);
+      const label = document.createElement('span');
+      label.textContent = 'Place details';
+      sheet.querySelector('.sheet-toolbar').prepend(label);
+    } else {
+      sheet.removeAttribute('aria-labelledby');
+    }
+    sheet.scrollTop = 0;
     sheet.querySelectorAll('[data-open]').forEach((b) => (b.onclick = () => openCard(b.dataset.open)));
     sheet.querySelectorAll('[data-details]').forEach((b) => (b.onclick = () => openDetails(b.dataset.details)));
     sheet.querySelectorAll('[data-bookmark]').forEach((b) => (b.onclick = () => toggleBookmark(b.dataset.bookmark)));
@@ -584,16 +587,17 @@
   }
 
   function openCrawl() {
-    showTab('map');
+    showTab('crawl');
+    sheet.hidden = true;
     const { stops, legs } = crawlLegs();
-    sheet.hidden = false;
-    sheet.innerHTML = `
+    panel.hidden = false;
+    panel.innerHTML = `
       <div class="content">
         <p class="kicker">Food crawl</p>
         <h1>Plan my food crawl</h1>
-        <p class="muted">Pick 2–4 nearby eateries, including bookmarks. Distances are walking estimates.</p>
+        <p class="muted">Pick 2–4 nearby eateries, including bookmarks. Distances are straight-line estimates, not walking directions.</p>
         <label class="field">Route name
-          <input id="crawl-name" value="${state.crawl.name || ''}" placeholder="East Side kaya hop">
+          <input id="crawl-name" value="${escapeHtml(state.crawl.name || '')}" placeholder="East Side kaya hop">
         </label>
         <div class="grid">
           ${stops
@@ -602,8 +606,8 @@
             <div class="news-card row" style="justify-content:space-between">
               <div><strong>${i + 1}. ${s.name}</strong><div class="muted">${s.neighbourhood}</div></div>
               <div class="row">
-                <button class="secondary" data-up="${i}">Up</button>
-                <button class="secondary" data-down="${i}">Down</button>
+                <button class="secondary" data-up="${i}" ${i === 0 ? 'disabled' : ''}>Up</button>
+                <button class="secondary" data-down="${i}" ${i === stops.length - 1 ? 'disabled' : ''}>Down</button>
                 <button class="secondary" data-rm="${s.id}">Remove</button>
               </div>
             </div>`,
@@ -613,14 +617,17 @@
         ${legs.map((l) => `<p class="muted">${l.from} → ${l.to}: ~${l.km} km · ~${l.mins} min walk</p>`).join('')}
         <p class="muted">${stops.length < 2 ? 'Add at least two stops from the map or bookmarks.' : ''}</p>
         <div class="row">
-          <button class="primary" id="save-crawl">Save route</button>
+          <button class="primary" id="save-crawl" ${stops.length < 2 ? 'disabled' : ''}>Save route</button>
           <button class="secondary" data-close-sheet>Done</button>
         </div>
         <h3>Bookmarks you can add</h3>
-        <div class="grid">${[...bookmarkedIds()].map(byId).filter(Boolean).map((e) => `<button class="secondary" data-add-crawl="${e.id}">+ ${e.name}</button>`).join('') || '<p class="muted">No bookmarks yet.</p>'}</div>
+        <div class="grid">${[...bookmarkedIds()].map(byId).filter(e => e && !state.crawl.stops.includes(e.id)).map((e) => `<button class="secondary" data-add-crawl="${e.id}">+ ${e.name}</button>`).join('') || '<p class="muted">No bookmarks yet.</p>'}</div>
       </div>`;
-    bindSheet();
-    sheet.querySelectorAll('[data-up]').forEach((b) => {
+    panel.querySelectorAll('[data-add-crawl]').forEach(b => { b.onclick = () => addToCrawl(b.dataset.addCrawl); });
+    panel.querySelector('[data-close-sheet]').onclick = () => showTab('map');
+    $('crawl-name').oninput = event => { state.crawl.name = event.target.value; persist(); };
+    renderRoute();
+    panel.querySelectorAll('[data-up]').forEach((b) => {
       b.onclick = () => {
         const i = Number(b.dataset.up);
         if (i === 0) return;
@@ -630,7 +637,7 @@
         openCrawl();
       };
     });
-    sheet.querySelectorAll('[data-down]').forEach((b) => {
+    panel.querySelectorAll('[data-down]').forEach((b) => {
       b.onclick = () => {
         const i = Number(b.dataset.down);
         const arr = state.crawl.stops;
@@ -640,7 +647,7 @@
         openCrawl();
       };
     });
-    sheet.querySelectorAll('[data-rm]').forEach((b) => {
+    panel.querySelectorAll('[data-rm]').forEach((b) => {
       b.onclick = () => {
         state.crawl.stops = state.crawl.stops.filter((x) => x !== b.dataset.rm);
         persist();
@@ -709,9 +716,9 @@
           </label>
           <label class="field">Worth Going
             <select id="f-s" multiple size="3">
-              <option value="3" ${f.stars.includes('3') ? 'selected' : ''}>3 gold</option>
-              <option value="2" ${f.stars.includes('2') ? 'selected' : ''}>2 half-gold</option>
-              <option value="1" ${f.stars.includes('1') ? 'selected' : ''}>1 grey</option>
+              <option value="3" ${f.stars.includes('3') ? 'selected' : ''}>Highly recommended</option>
+              <option value="2" ${f.stars.includes('2') ? 'selected' : ''}>Worth considering</option>
+              <option value="1" ${f.stars.includes('1') ? 'selected' : ''}>If convenient</option>
             </select>
           </label>
           <label class="field">Affordability
@@ -911,6 +918,10 @@
   }
 
   function renderCommunity() {
+    const scrollPosition = panel.scrollTop;
+    const openThreads = [...panel.querySelectorAll('details[open][id]')].map(el => el.id);
+    const focusedId = panel.contains(document.activeElement) ? document.activeElement.id : '';
+    const drafts = [...panel.querySelectorAll('[data-comment-form] input')].map(el => [el.id, el.value]);
     panel.hidden = false;
     const visits = DATA.visits
       .filter((visit) => visit.visibility === 'public' || (visit.visibility === 'followers' && state.following.includes(visit.foodieId)))
@@ -929,7 +940,7 @@
 
     panel.innerHTML = `
       <div class="community-intro">
-        <p class="kicker">MakanMates community · demo visits</p>
+        <p class="kicker">Out Spoke community · demo visits</p>
         <h2>Fellow foodies</h2>
         <p class="muted">Recent meals, neighbourhood favourites, and honest notes from local food explorers.</p>
       </div>
@@ -1016,10 +1027,15 @@
         if (!comment) return;
         const current = state.social[id] || { liked: false, comments: [] };
         state.social[id] = { ...current, comments: [...(current.comments || []), comment] };
+        form.elements.comment.value = '';
         persist();
         renderCommunity();
       };
     });
+    openThreads.forEach(id => { if ($(id)) $(id).open = true; });
+    drafts.forEach(([id, value]) => { if ($(id)) $(id).value = value; });
+    if (focusedId && $(focusedId)) $(focusedId).focus({ preventScroll: true });
+    panel.scrollTop = scrollPosition;
   }
 
   function bindPanelOpens() {
@@ -1265,13 +1281,13 @@
         <input name="n" placeholder="New list name" style="flex:1;padding:10px;border-radius:12px;border:1px solid var(--line)">
         <button class="secondary">Add list</button>
       </form>
-      <h3>About ratings</h3>
+      <h3>About recommendations</h3>
       <article class="news-card">
-        <p>Outspoke uses a 1–3 <strong>Worth Going</strong> score, not a 5-star Google clone.</p>
+        <p>Out Spoke recommendations use three labels, separate from community ratings out of five.</p>
         <ul>
-          <li><strong>3 gold:</strong> strong recent TikTok interest, positive sentiment, excellent value or uniqueness.</li>
-          <li><strong>2 half-gold:</strong> good social interest, a niche pick, or a solid option in its area.</li>
-          <li><strong>1 grey:</strong> visit only if convenient — possibly viral, inconsistent, or overhyped.</li>
+          <li><strong>Highly recommended:</strong> a strong pick based on the demo recommendation signals.</li>
+          <li><strong>Worth considering:</strong> a solid option in its area.</li>
+          <li><strong>If convenient:</strong> a more mixed recommendation.</li>
         </ul>
         <p>TikTok is weighted first, Instagram second. Google Reviews are not the primary ranking signal. Viral and worth-it are shown separately. TikTok Heat blends recency and popularity so a place trending this week looks different from a long-standing classic. All social and promo figures in this build are <strong>demo data</strong> until a verified data service is connected.</p>
       </article>
@@ -1279,6 +1295,16 @@
       <p class="muted">Bookings: ${state.bookings.length} demo request(s). Crawl stops: ${state.crawl.stops.length}.</p>
       <button class="secondary" id="btn-reset">Clear local data</button>`;
     $('pr-budget').value = p.budget;
+    const collectionForm = $('new-list');
+    const collections = collectionForm.previousElementSibling;
+    const collectionHeading = collections.previousElementSibling;
+    const settings = document.createElement('details');
+    settings.className = 'profile-settings';
+    settings.innerHTML = '<summary>Profile, preferences & settings</summary>';
+    [collectionHeading, collections, collectionForm].forEach(el => el.remove());
+    while (panel.firstChild) settings.appendChild(panel.firstChild);
+    panel.append(collectionHeading, collections, collectionForm, settings);
+    collectionHeading.textContent = 'Your saved places';
     $('pr-vibe').value = p.vibe;
     $('pr-theme').value = p.theme;
     $('pr-den').value = p.density;
@@ -1309,6 +1335,7 @@
       renderProfile();
     };
     $('btn-reset').onclick = () => {
+      if (!window.confirm('Clear saved places, preferences, comments and plans on this device? This cannot be undone.')) return;
       localStorage.removeItem(KEY);
       location.reload();
     };
@@ -1348,11 +1375,42 @@
   }
 
   function refresh() {
+    updateDiscoveryContext();
     applyTheme();
     renderChips();
     renderTrending();
     renderPins();
     renderHotzones();
+  }
+
+  let locationResolved = false;
+  function updateDiscoveryContext() {
+    let context = $('discovery-context');
+    if (!context) {
+      context = document.createElement('div');
+      context.id = 'discovery-context';
+      $('map-search-wrap').appendChild(context);
+    }
+    const count = Object.values(state.filters).reduce((sum, v) => sum + (Array.isArray(v) ? v.length : v ? 1 : 0), 0) + state.chips.length;
+    $('btn-filters').textContent = count ? `Filters (${count})` : 'Filters';
+    context.innerHTML = `<span>${locationResolved ? 'Distances from your location' : 'Distances from central Singapore · demo starting point'}</span> <button type="button" class="text-btn" id="use-location">Use my location</button>${count || state.query ? '<button type="button" class="text-btn" id="clear-discovery">Clear search & filters</button>' : ''}`;
+    $('use-location').onclick = () => {
+      if (!navigator.geolocation) return toast('Location is unavailable. Choose a neighbourhood in Filters.');
+      navigator.geolocation.getCurrentPosition(pos => {
+        state.userHere = [pos.coords.latitude, pos.coords.longitude];
+        locationResolved = true;
+        refresh();
+      }, () => toast('Location unavailable. Using central Singapore; choose a neighbourhood in Filters.'), { timeout: 10000 });
+    };
+    if ($('clear-discovery')) $('clear-discovery').onclick = () => {
+      Object.keys(state.filters).forEach(k => { state.filters[k] = Array.isArray(state.filters[k]) ? [] : typeof state.filters[k] === 'boolean' ? false : ''; });
+      state.chips = [];
+      state.query = '';
+      $('crave-input').value = '';
+      $('search-q').value = '';
+      persist();
+      refresh();
+    };
   }
 
   function initMap() {
@@ -1438,6 +1496,7 @@
     navigator.geolocation?.getCurrentPosition(
       (pos) => {
         state.userHere = [pos.coords.latitude, pos.coords.longitude];
+        locationResolved = true;
         refresh();
       },
       () => {},
@@ -1450,6 +1509,46 @@
     if(mode){discoveryMode=mode.dataset.discovery;renderTrending();}
   });
   window.matchMedia('(min-width: 960px)').addEventListener('change',()=>{renderTrending();if(map)map.resize();});
+  // Dialog focus stays inside the active overlay and returns to its trigger.
+  const overlayTriggers = new Map();
+  [sheet, modal].forEach(overlay => {
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', overlay === sheet ? 'Place and planning information' : 'Options');
+    overlay.tabIndex = -1;
+    new MutationObserver(() => {
+      if (!overlay.hidden && !overlayTriggers.has(overlay)) {
+        overlayTriggers.set(overlay, document.activeElement);
+        overlay.focus({ preventScroll: true });
+      } else if (overlay.hidden && overlayTriggers.has(overlay)) {
+        const trigger = overlayTriggers.get(overlay);
+        overlayTriggers.delete(overlay);
+        if (trigger?.isConnected) trigger.focus({ preventScroll: true });
+        else $('btn-home').focus({ preventScroll: true });
+      }
+      if (overlay === modal && !modal.hidden && !$('modal-box').querySelector('.close-x')) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'close-x';
+        button.setAttribute('aria-label', 'Close dialog');
+        button.textContent = '×';
+        button.onclick = () => { modal.hidden = true; };
+        $('modal-box').prepend(button);
+      }
+    }).observe(overlay, { attributes: true, attributeFilter: ['hidden'], childList: true, subtree: true });
+  });
+  document.addEventListener('keydown', event => {
+    const active = !modal.hidden ? modal : !sheet.hidden ? sheet : null;
+    if (!active) return;
+    if (event.key === 'Escape') { active.hidden = true; event.preventDefault(); }
+    if (event.key === 'Tab') {
+      const items = [...active.querySelectorAll('button, a[href], input, select, textarea, summary, [tabindex="0"]')].filter(el => !el.disabled && el.getClientRects().length);
+      const first = items[0], last = items[items.length - 1];
+      if (!first) { event.preventDefault(); active.focus(); }
+      else if (event.shiftKey && (document.activeElement === first || document.activeElement === active)) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || !active.contains(document.activeElement))) { event.preventDefault(); first.focus(); }
+    }
+  });
   initMap();
   bindUi();
   refresh();

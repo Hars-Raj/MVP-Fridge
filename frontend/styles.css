@@ -477,6 +477,8 @@ body {
 }
 
 .sheet {
+  /* Above the floating header (30), below reservation/filter dialogs (40). */
+  z-index: 35;
   left: 0;
   right: 0;
   bottom: var(--tabbar);
@@ -1368,3 +1370,71 @@ body[data-page]:not([data-page=map]) .legend { display:none; }
 .social-context summary, .plan-options summary { color:var(--orange-deep); }
 .food-card, .news-card, .community-card { box-shadow:0 3px 14px rgba(36,37,42,.04); }
 button:focus-visible, a:focus-visible, summary:focus-visible { outline:3px solid var(--orange-deep); outline-offset:3px; }
+/* Review fixes: persistent exits/actions and clearer small-screen controls. */
+.sheet-toolbar { position:sticky; top:0; z-index:5; display:flex; justify-content:flex-end; padding:6px 10px; background:#fff; }
+.close-x { display:grid; place-items:center; width:44px; height:44px; padding:0; border:0; border-radius:50%; background:#fff0f1; color:#c93647; font-size:24px; line-height:1; cursor:pointer; }
+.modal .box > .close-x { position:sticky; top:0; margin-left:auto; z-index:5; }
+.sheet .place-actions { position:sticky; bottom:0; z-index:4; display:flex; gap:8px; flex-wrap:wrap; padding:12px 18px; background:#fff; border-top:1px solid var(--line); }
+#discovery-context { padding:8px 12px; margin-top:8px; border-radius:16px; background:#fff; font-size:12px; color:var(--muted); }
+#discovery-context .text-btn { font-size:12px; padding:4px; }
+.profile-settings { margin-top:24px; }
+.profile-settings > summary { padding:16px 0; font-weight:600; cursor:pointer; }
+:focus-visible { outline:3px solid #c93647; outline-offset:3px; }
+@media(max-width:959px) {
+  #map-search-wrap.float-search { top:148px; left:12px; right:12px; width:auto; transform:none; }
+  #map-search-wrap .chips { max-height:110px; overflow:auto; }
+}
+.brand-product { display:block; font-size:11px; line-height:18px; text-align:center; background:#fff; color:#24252a; border-radius:0 0 8px 8px; }
+/* Crawl planning sits beside the map, not in the place-detail overlay. */
+body[data-page="crawl"] #panel {
+  inset:0 auto 0 0;
+  width:min(400px, 100%);
+  box-sizing:border-box;
+  padding:108px 20px 24px;
+  overflow-y:auto;
+}
+body[data-page="crawl"] #panel .grid { grid-template-columns:1fr; }
+body[data-page="crawl"] #panel h1 { font-size:28px; }
+body[data-page="crawl"] #panel button:disabled { opacity:.45; cursor:not-allowed; }
+@media(max-width:959px) {
+  body[data-page="crawl"] #panel {
+    top:148px;
+    bottom:calc(var(--tabbar) + env(safe-area-inset-bottom));
+    width:min(360px, 90vw);
+    padding:20px 16px;
+  }
+}
+
+/* Full-screen place view: only the middle section scrolls. */
+#sheet.place-detail {
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100dvh;
+  max-height:none;
+  border-radius:0;
+  padding:0;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+#sheet.place-detail[hidden] { display:none; }
+.place-detail .sheet-toolbar {
+  position:static;
+  flex-shrink:0;
+  align-items:center;
+  justify-content:space-between;
+  padding:calc(8px + env(safe-area-inset-top)) 16px 8px;
+  border-bottom:1px solid var(--line);
+  font-weight:600;
+}
+.place-detail-scroll { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; }
+.place-detail .hero, .place-detail .content { width:100%; max-width:960px; margin:0 auto; box-sizing:border-box; }
+.place-detail .hero img { display:block; width:100%; height:clamp(200px, 32dvh, 360px); object-fit:cover; border-radius:0; }
+.place-detail .content { padding:24px 24px 32px; }
+#sheet.place-detail .place-actions { position:static; flex-shrink:0; padding-bottom:calc(12px + env(safe-area-inset-bottom)); justify-content:center; }
+@media(max-width:600px) {
+  .place-detail .content { padding:18px 16px 24px; }
+  .place-detail h1 { font-size:28px; }
+  .place-detail .place-actions > * { flex:1; text-align:center; }
+}
